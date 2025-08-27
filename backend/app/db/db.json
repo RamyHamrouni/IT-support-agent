@@ -1,0 +1,580 @@
+{
+  "user": [
+  {
+    "id": "USER-001",
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "device_type": "Laptop",
+    "product_model": "HP Pavilion x360",
+    "os_version": "Windows 11",
+    "location": "New York",
+    "past_tickets": ["TICKET-001"]
+  },
+  {
+    "id": "USER-002",
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "device_type": "Printer",
+    "product_model": "HP LaserJet Pro M404",
+    "os_version": "N/A",
+    "location": "London",
+    "past_tickets": ["TICKET-002"]
+  },
+  {
+    "id": "USER-003",
+    "name": "Charlie Lee",
+    "email": "charlie.lee@example.com",
+    "device_type": "Laptop",
+    "product_model": "HP EliteBook 840",
+    "os_version": "Windows 10",
+    "location": "Berlin",
+    "past_tickets": ["TICKET-003"]
+  },
+  {
+    "id": "USER-004",
+    "name": "Diana Cruz",
+    "email": "diana.cruz@example.com",
+    "device_type": "Desktop",
+    "product_model": "HP All-in-One 24",
+    "os_version": "Windows 11",
+    "location": "Paris",
+    "past_tickets": ["TICKET-004"]
+  },
+  {
+    "id": "USER-005",
+    "name": "Ethan Patel",
+    "email": "ethan.patel@example.com",
+    "device_type": "Laptop",
+    "product_model": "HP Spectre x360",
+    "os_version": "Windows 11",
+    "location": "Toronto",
+    "past_tickets": ["TICKET-005"]
+  },
+  {
+    "id": "USER-006",
+    "name": "Fiona Chen",
+    "email": "fiona.chen@example.com",
+    "device_type": "Printer",
+    "product_model": "HP DeskJet 3755",
+    "os_version": "N/A",
+    "location": "Sydney",
+    "past_tickets": []
+  },
+  {
+    "id": "USER-007",
+    "name": "George Kim",
+    "email": "george.kim@example.com",
+    "device_type": "Laptop",
+    "product_model": "HP ProBook 450",
+    "os_version": "Windows 10",
+    "location": "Seoul",
+    "past_tickets": []
+  },
+  {
+    "id": "USER-008",
+    "name": "Hannah Müller",
+    "email": "hannah.muller@example.com",
+    "device_type": "Tablet",
+    "product_model": "HP Elite x2",
+    "os_version": "Windows 11",
+    "location": "Munich",
+    "past_tickets": []
+  },
+  {
+    "id": "USER-009",
+    "name": "Ivan Petrov",
+    "email": "ivan.petrov@example.com",
+    "device_type": "Laptop",
+    "product_model": "HP Omen 15",
+    "os_version": "Windows 11",
+    "location": "Moscow",
+    "past_tickets": []
+  },
+  {
+    "id": "USER-010",
+    "name": "Julia Lopez",
+    "email": "julia.lopez@example.com",
+    "device_type": "Printer",
+    "product_model": "HP Envy 6055",
+    "os_version": "N/A",
+    "location": "Madrid",
+    "past_tickets": []
+  }
+],
+  "kb": [
+    {
+      "id": "KB-001",
+      "category": "Printer",
+      "issue_code": "PR-001",
+      "question": "Printer shows 'Paper Jam' error",
+      "answer": "If your HP printer shows a 'Paper Jam' error, follow these steps:\n1. Power off printer and unplug.\n2. Open all covers and remove jammed paper carefully.\n3. Inspect rollers and paper paths for debris.\n4. Close covers and power on.\n5. Print a test page to confirm resolution.\nFor more info: Click here.",
+      "tags": [
+        "printer",
+        "paper jam"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/Paper-Jam/td-p/12345"
+    },
+    {
+      "id": "KB-002",
+      "category": "Printer",
+      "issue_code": "PR-002",
+      "question": "Printer not connecting to Wi-Fi",
+      "answer": "If your printer cannot connect to Wi-Fi:\n1. Ensure printer and router are powered on and in range.\n2. Restart both devices.\n3. Reconnect printer using wireless setup.\n4. Confirm correct Wi-Fi password.\n5. Check firewall/antivirus.\n6. Print a network configuration page.\nFor details: Click here.",
+      "tags": [
+        "printer",
+        "wifi",
+        "network"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/WiFi-Setup/td-p/67890"
+    },
+    {
+      "id": "KB-003",
+      "category": "Windows",
+      "issue_code": "WIN-001",
+      "question": "Cannot install HP driver on Windows 11",
+      "answer": "To install an HP driver on Windows 11:\n1. Download latest driver from HP Support.\n2. Right-click and 'Run as administrator'.\n3. Temporarily disable antivirus.\n4. Follow prompts.\n5. Restart computer.\n6. Verify driver in Device Manager.\nMore info: Click here.",
+      "tags": [
+        "windows",
+        "driver",
+        "installation"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Windows-11-Drivers/Driver-Installation-Issues/td-p/13579"
+    },
+    {
+      "id": "KB-004",
+      "category": "Network",
+      "issue_code": "NET-001",
+      "question": "VPN disconnects frequently",
+      "answer": "If VPN disconnects frequently:\n1. Restart VPN client and computer.\n2. Check internet connection.\n3. Update VPN client.\n4. Verify firewall settings.\n5. Try different network/server.\nFor details: Click here.",
+      "tags": [
+        "vpn",
+        "network",
+        "disconnect"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Network-Support/VPN-Troubleshooting/td-p/24680"
+    },
+    {
+      "id": "KB-005",
+      "category": "Account",
+      "issue_code": "ACC-001",
+      "question": "Forgot HP account password",
+      "answer": "To reset HP account password:\n1. Visit https://account.hp.com.\n2. Click 'Forgot Password'.\n3. Enter registered email.\n4. Follow instructions to reset.\n5. Log in with new password.\nMore info: Click here.",
+      "tags": [
+        "account",
+        "password",
+        "login"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Account-Support/Password-Reset/td-p/11223"
+    },
+    {
+      "id": "KB-006",
+      "category": "Software",
+      "issue_code": "SW-001",
+      "question": "Application crashes on launch",
+      "answer": "If an HP application crashes on launch:\n1. Restart computer.\n2. Ensure application updated.\n3. Reinstall application.\n4. Check system updates.\n5. Temporarily disable antivirus.\n6. Check for conflicts.\nMore info: Click here.",
+      "tags": [
+        "software",
+        "crash"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Software-FAQ/App-Crash/td-p/33456"
+    },
+    {
+      "id": "KB-007",
+      "category": "Printer",
+      "issue_code": "PR-003",
+      "question": "Printer prints blank pages",
+      "answer": "If printer prints blank pages:\n1. Check toner/ink levels.\n2. Ensure cartridges installed properly.\n3. Run cleaning cycle.\n4. Verify print settings.\n5. Restart printer.\nMore info: Click here.",
+      "tags": [
+        "printer",
+        "ink",
+        "toner"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/Blank-Pages/td-p/44567"
+    },
+    {
+      "id": "KB-008",
+      "category": "Network",
+      "issue_code": "NET-002",
+      "question": "Cannot access internal network drives",
+      "answer": "If you cannot access internal network drives:\n1. Check VPN connection.\n2. Verify permissions.\n3. Restart computer.\n4. Test on another device.\nMore info: Click here.",
+      "tags": [
+        "network",
+        "vpn"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Network-Support/Internal-Drives/td-p/55678"
+    },
+    {
+      "id": "KB-009",
+      "category": "Windows",
+      "issue_code": "WIN-002",
+      "question": "Blue screen error after update",
+      "answer": "If BSOD after update:\n1. Boot in Safe Mode.\n2. Uninstall recent updates.\n3. Run system file checker.\n4. Check driver updates.\n5. System restore if necessary.\nMore info: Click here.",
+      "tags": [
+        "windows",
+        "bsod"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Windows-11-Drivers/BSOD/td-p/66789"
+    },
+    {
+      "id": "KB-010",
+      "category": "Account",
+      "issue_code": "ACC-002",
+      "question": "Cannot login to HP account",
+      "answer": "If you cannot login:\n1. Reset password.\n2. Clear browser cache.\n3. Try different browser.\n4. Check verification email.\nMore info: Click here.",
+      "tags": [
+        "account",
+        "login"
+      ],
+      "source_url": "https://h30434.www3.hp.com/t5/Account-Support/Login-Issues/td-p/77890"
+    }
+  ],
+  "guide": [
+    {
+      "id": "GUIDE-001",
+      "category": "Hardware",
+      "issue_code": "HW-001",
+      "issue": "Laptop not powering on",
+      "diagnostic_questions": [
+        "Is the laptop plugged in?",
+        "Is the battery charged?",
+        "Do any lights turn on?"
+      ],
+      "troubleshooting_steps": [
+        "Ensure power adapter connected",
+        "Remove battery and reconnect",
+        "Hard reset by holding power 10 sec",
+        "Power on again"
+      ],
+      "quick_fixes": [
+        "Replace faulty power adapter",
+        "Test with known-good battery"
+      ],
+      "escalation_criteria": "Escalate to Level 2 if laptop still does not power on",
+      "ticketing_fields": [
+        "Issue summary",
+        "Device model",
+        "User ID",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Notebook-Hardware-Troubleshooting/Laptop-Power-Issues/td-p/10001"
+      ]
+    },
+    {
+      "id": "GUIDE-002",
+      "category": "Printer",
+      "issue_code": "PR-001",
+      "issue": "Paper jam",
+      "diagnostic_questions": [
+        "Which tray shows jam?",
+        "When did it happen?",
+        "Any previous jams?"
+      ],
+      "troubleshooting_steps": [
+        "Turn off and unplug printer",
+        "Remove jammed paper",
+        "Check rollers",
+        "Power on and test print"
+      ],
+      "quick_fixes": [
+        "Clean rollers",
+        "Properly load paper"
+      ],
+      "escalation_criteria": "Escalate if repeated jams after cleaning",
+      "ticketing_fields": [
+        "Issue summary",
+        "Printer model",
+        "Tray affected",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/Paper-Jam/td-p/12345"
+      ]
+    },
+    {
+      "id": "GUIDE-003",
+      "category": "Software",
+      "issue_code": "SW-001",
+      "issue": "Application crashes on launch",
+      "diagnostic_questions": [
+        "Which app crashes?",
+        "Error messages?",
+        "When started?"
+      ],
+      "troubleshooting_steps": [
+        "Restart PC",
+        "Update app",
+        "Reinstall app",
+        "Check system updates",
+        "Disable antivirus temporarily"
+      ],
+      "quick_fixes": [
+        "Run in compatibility mode",
+        "Update graphics drivers"
+      ],
+      "escalation_criteria": "Escalate if crashes persist",
+      "ticketing_fields": [
+        "Issue summary",
+        "App name",
+        "Version",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Software-FAQ/App-Crash/td-p/33456"
+      ]
+    },
+    {
+      "id": "GUIDE-004",
+      "category": "Network",
+      "issue_code": "NET-001",
+      "issue": "VPN disconnects frequently",
+      "diagnostic_questions": [
+        "Other internet stable?",
+        "When disconnects?",
+        "Specific server?"
+      ],
+      "troubleshooting_steps": [
+        "Restart VPN client and PC",
+        "Check internet",
+        "Update VPN client",
+        "Check firewall"
+      ],
+      "quick_fixes": [
+        "Switch VPN server",
+        "Test different network"
+      ],
+      "escalation_criteria": "Escalate if disconnections persist",
+      "ticketing_fields": [
+        "Issue summary",
+        "VPN type",
+        "User ID",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Network-Support/VPN-Troubleshooting/td-p/24680"
+      ]
+    },
+    {
+      "id": "GUIDE-005",
+      "category": "Account",
+      "issue_code": "ACC-001",
+      "issue": "Forgot HP account password",
+      "diagnostic_questions": [
+        "Linked email?",
+        "Tried password recovery?",
+        "Two-factor enabled?"
+      ],
+      "troubleshooting_steps": [
+        "Guide to HP account page",
+        "Click 'Forgot Password'",
+        "Enter email",
+        "Reset password",
+        "Test login"
+      ],
+      "quick_fixes": [
+        "Clear browser cache",
+        "Try different browser"
+      ],
+      "escalation_criteria": "Escalate if reset email not received or account locked",
+      "ticketing_fields": [
+        "Issue summary",
+        "User email",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Account-Support/Password-Reset/td-p/11223"
+      ]
+    },
+    {
+      "id": "GUIDE-006",
+      "category": "Hardware",
+      "issue_code": "HW-002",
+      "issue": "Printer not powering on",
+      "diagnostic_questions": [
+        "Printer plugged in?",
+        "Cables intact?",
+        "Indicator lights?"
+      ],
+      "troubleshooting_steps": [
+        "Check power outlet",
+        "Test with working outlet",
+        "Inspect adapter",
+        "Restart printer"
+      ],
+      "quick_fixes": [
+        "Replace adapter"
+      ],
+      "escalation_criteria": "Escalate if still does not turn on",
+      "ticketing_fields": [
+        "Printer model",
+        "Steps attempted",
+        "Outlet tested"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/Power-Issues/td-p/99887"
+      ]
+    },
+    {
+      "id": "GUIDE-007",
+      "category": "Network",
+      "issue_code": "NET-002",
+      "issue": "Cannot access internal network drives",
+      "diagnostic_questions": [
+        "On VPN?",
+        "Accessed before?",
+        "Error messages?"
+      ],
+      "troubleshooting_steps": [
+        "Check VPN",
+        "Verify permissions",
+        "Restart PC",
+        "Test another device"
+      ],
+      "quick_fixes": [
+        "Reconnect VPN",
+        "Check path"
+      ],
+      "escalation_criteria": "Escalate if access denied persists",
+      "ticketing_fields": [
+        "User ID",
+        "Drive name",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Network-Support/Internal-Drives/td-p/55678"
+      ]
+    },
+    {
+      "id": "GUIDE-008",
+      "category": "Software",
+      "issue_code": "SW-002",
+      "issue": "OS update fails to install",
+      "diagnostic_questions": [
+        "OS version?",
+        "Error code?",
+        "Disk space?"
+      ],
+      "troubleshooting_steps": [
+        "Check disk space",
+        "Restart PC",
+        "Manual download",
+        "Disable antivirus"
+      ],
+      "quick_fixes": [
+        "Run Windows Update Troubleshooter"
+      ],
+      "escalation_criteria": "Escalate if update still fails",
+      "ticketing_fields": [
+        "OS version",
+        "Error code",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Windows-Update-FAQ/Update-Failures/td-p/66777"
+      ]
+    },
+    {
+      "id": "GUIDE-009",
+      "category": "Account",
+      "issue_code": "ACC-002",
+      "issue": "Cannot login to HP account",
+      "diagnostic_questions": [
+        "Correct username/email?",
+        "Error messages?",
+        "Browser tried?"
+      ],
+      "troubleshooting_steps": [
+        "Reset password",
+        "Clear cache",
+        "Try different browser",
+        "Check verification email"
+      ],
+      "quick_fixes": [
+        "Disable blocking browser extensions"
+      ],
+      "escalation_criteria": "Escalate if login fails after reset",
+      "ticketing_fields": [
+        "User email",
+        "Browser used",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Account-Support/Login-Issues/td-p/77890"
+      ]
+    },
+    {
+      "id": "GUIDE-010",
+      "category": "Peripheral",
+      "issue_code": "PER-001",
+      "issue": "Mouse or keyboard not detected",
+      "diagnostic_questions": [
+        "Wired or wireless?",
+        "Connected port?",
+        "Error messages?"
+      ],
+      "troubleshooting_steps": [
+        "Reconnect device",
+        "Restart PC",
+        "Update drivers",
+        "Test on another PC"
+      ],
+      "quick_fixes": [
+        "Replace batteries/wire",
+        "Try different cable"
+      ],
+      "escalation_criteria": "Escalate if device not detected on multiple systems",
+      "ticketing_fields": [
+        "Device type",
+        "Port tested",
+        "Steps attempted"
+      ],
+      "kb_links": [
+        "https://h30434.www3.hp.com/t5/Peripheral-Device-Support/Mouse-Keyboard-Detection/td-p/88990"
+      ]
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TICKET-001",
+      "user": "user1",
+      "issue_code": "PR-001",
+      "description": "Printer jammed when printing",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-002",
+      "user": "user2",
+      "issue_code": "HW-001",
+      "description": "Laptop won't start",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-003",
+      "user": "user3",
+      "issue_code": "SW-001",
+      "description": "App crashes on launch",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-004",
+      "user": "user4",
+      "issue_code": "NET-001",
+      "description": "VPN disconnects repeatedly",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-005",
+      "user": "user5",
+      "issue_code": "ACC-002",
+      "description": "Cannot login to account",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-006",
+      "user": "user10",
+      "issue_code": "PR-001",
+      "description": "Printer jammed again",
+      "status": "open"
+    }
+  ]
+}
