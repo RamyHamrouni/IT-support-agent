@@ -1,0 +1,57 @@
+tools:
+  - type: function
+    function:
+      name: query_knowledge_base
+      description: Query the internal knowledge base for relevant articles or solutions.
+      parameters:
+        type: object
+        properties:
+          query:
+            type: string
+            description: Search query for the knowledge base
+          max_results:
+            type: integer
+            description: Maximum number of results to return
+          type_issue:
+            type: string
+            description: Type of the issue
+            enum: "{categories}"   # replace with list or inject dynamically
+        required: [query]
+
+  - type: function
+    function:
+      name: query_issue_guide
+      description: Search FAQs to provide immediate answers to common issues.
+      parameters:
+        type: object
+        properties:
+          query:
+            type: string
+            description: Search query for FAQs
+          max_results:
+            type: integer
+            description: Maximum number of FAQ answers to return
+          type_issue:
+            type: string
+            description: Type of the issue
+            enum: "{categories}"
+        required: [query]
+
+  - type: function
+    function:
+      name: manage_ticket
+      description: Create or update a ticket with the given state.
+      parameters:
+        type: object
+        properties:
+          issue_description:
+            type: string
+            description: Description of the user's issue
+          action:
+            type: string
+            enum: [open, close]
+            description: Open or close the ticket
+          ticket_id:
+            type: string
+            description: Ticket ID if updating an existing ticket
+        required: [issue_description, action]

@@ -12,10 +12,6 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: List[Message] = Field(default_factory=list)
-    model: Optional[str] = None
-    max_new_tokens: int = 256
-    temperature: float = 0.7
-    top_p: float = 0.95
 
 
 class ChatResponse(BaseModel):
