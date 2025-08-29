@@ -16,7 +16,6 @@ allow_headers=["*"],
 
 class Ticket(BaseModel):
     user: str
-    issue_code: str
     description: str
     status: str = "open"   # default status
 
@@ -53,7 +52,6 @@ def create_ticket(ticket: Ticket):
     new_ticket = {
         "id": f"TICKET-{len(db['tickets']) + 1:03d}",
         "user": ticket.user,
-        "issue_code": ticket.issue_code,
         "description": ticket.description,
         "status": ticket.status
     }
@@ -67,10 +65,10 @@ def create_ticket(ticket: Ticket):
 
 
 
-@app.get("/kb/{issue_code}")
-def get_kb_by_code(issue_code: str):
+@app.get("/kb/{id}")
+def get_kb_by_id(id: str):
     for item in db["kb"]:
-        if item["issue_code"] == issue_code:
+        if item["id"] == id:
             return item
     return {"error": "Not found"}
 

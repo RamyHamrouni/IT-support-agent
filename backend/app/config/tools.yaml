@@ -9,14 +9,12 @@ tools:
           query:
             type: string
             description: Search query for the knowledge base
-          max_results:
-            type: integer
-            description: Maximum number of results to return
+
           type_issue:
             type: string
             description: Type of the issue
             enum: "{categories}"   # replace with list or inject dynamically
-        required: [query]
+        required: [query, max_results, type_issue]
 
   - type: function
     function:
@@ -28,14 +26,12 @@ tools:
           query:
             type: string
             description: Search query for FAQs
-          max_results:
-            type: integer
-            description: Maximum number of FAQ answers to return
+
           type_issue:
             type: string
             description: Type of the issue
             enum: "{categories}"
-        required: [query]
+        required: [query, max_results, type_issue]
 
   - type: function
     function:
@@ -47,7 +43,10 @@ tools:
           issue_description:
             type: string
             description: Description of the user's issue
-          action:
+          issue_code:
+            type: string
+            description: Code of the issue if available
+          status:
             type: string
             enum: [open, close]
             description: Open or close the ticket

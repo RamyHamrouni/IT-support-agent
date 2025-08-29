@@ -11,7 +11,7 @@ class HFClient:
             raise RuntimeError("HF_TOKEN is missing. Set it in your environment variables.")
         self.client = InferenceClient(token=self.token)
    
-    def generate(self, model: str, prompt: str, params: Dict[str, Any],tools) -> str:
+    def generate(self, model: str, prompt: str, params: Dict[str, Any],tools) :
         
         print(f"Calling HF Inference API for model: {model}")
         
@@ -29,7 +29,7 @@ class HFClient:
             print("Warning: Multiple completions returned, using the first one.")
         if completion.choices[0].message.tool_calls:
             print(f"Tool calls: {completion.choices[0].message.tool_calls}")
-            return f"Tool calls: {completion.choices[0].message.tool_calls}"
+            return completion
         
 
-        return completion.choices[0].message.content
+        return completion

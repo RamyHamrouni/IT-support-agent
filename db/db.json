@@ -1,106 +1,116 @@
 {
   "user": [
-  {
-    "id": "USER-001",
-    "name": "Alice Johnson",
-    "email": "alice.johnson@example.com",
-    "device_type": "Laptop",
-    "product_model": "HP Pavilion x360",
-    "os_version": "Windows 11",
-    "location": "New York",
-    "past_tickets": ["TICKET-001"]
-  },
-  {
-    "id": "USER-002",
-    "name": "Bob Smith",
-    "email": "bob.smith@example.com",
-    "device_type": "Printer",
-    "product_model": "HP LaserJet Pro M404",
-    "os_version": "N/A",
-    "location": "London",
-    "past_tickets": ["TICKET-002"]
-  },
-  {
-    "id": "USER-003",
-    "name": "Charlie Lee",
-    "email": "charlie.lee@example.com",
-    "device_type": "Laptop",
-    "product_model": "HP EliteBook 840",
-    "os_version": "Windows 10",
-    "location": "Berlin",
-    "past_tickets": ["TICKET-003"]
-  },
-  {
-    "id": "USER-004",
-    "name": "Diana Cruz",
-    "email": "diana.cruz@example.com",
-    "device_type": "Desktop",
-    "product_model": "HP All-in-One 24",
-    "os_version": "Windows 11",
-    "location": "Paris",
-    "past_tickets": ["TICKET-004"]
-  },
-  {
-    "id": "USER-005",
-    "name": "Ethan Patel",
-    "email": "ethan.patel@example.com",
-    "device_type": "Laptop",
-    "product_model": "HP Spectre x360",
-    "os_version": "Windows 11",
-    "location": "Toronto",
-    "past_tickets": ["TICKET-005"]
-  },
-  {
-    "id": "USER-006",
-    "name": "Fiona Chen",
-    "email": "fiona.chen@example.com",
-    "device_type": "Printer",
-    "product_model": "HP DeskJet 3755",
-    "os_version": "N/A",
-    "location": "Sydney",
-    "past_tickets": []
-  },
-  {
-    "id": "USER-007",
-    "name": "George Kim",
-    "email": "george.kim@example.com",
-    "device_type": "Laptop",
-    "product_model": "HP ProBook 450",
-    "os_version": "Windows 10",
-    "location": "Seoul",
-    "past_tickets": []
-  },
-  {
-    "id": "USER-008",
-    "name": "Hannah Müller",
-    "email": "hannah.muller@example.com",
-    "device_type": "Tablet",
-    "product_model": "HP Elite x2",
-    "os_version": "Windows 11",
-    "location": "Munich",
-    "past_tickets": []
-  },
-  {
-    "id": "USER-009",
-    "name": "Ivan Petrov",
-    "email": "ivan.petrov@example.com",
-    "device_type": "Laptop",
-    "product_model": "HP Omen 15",
-    "os_version": "Windows 11",
-    "location": "Moscow",
-    "past_tickets": []
-  },
-  {
-    "id": "USER-010",
-    "name": "Julia Lopez",
-    "email": "julia.lopez@example.com",
-    "device_type": "Printer",
-    "product_model": "HP Envy 6055",
-    "os_version": "N/A",
-    "location": "Madrid",
-    "past_tickets": []
-  }
-],
+    {
+      "id": "USER-001",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "device_type": "Laptop",
+      "product_model": "HP Pavilion x360",
+      "os_version": "Windows 11",
+      "location": "New York",
+      "past_tickets": [
+        "TICKET-001"
+      ]
+    },
+    {
+      "id": "USER-002",
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "device_type": "Printer",
+      "product_model": "HP LaserJet Pro M404",
+      "os_version": "N/A",
+      "location": "London",
+      "past_tickets": [
+        "TICKET-002"
+      ]
+    },
+    {
+      "id": "USER-003",
+      "name": "Charlie Lee",
+      "email": "charlie.lee@example.com",
+      "device_type": "Laptop",
+      "product_model": "HP EliteBook 840",
+      "os_version": "Windows 10",
+      "location": "Berlin",
+      "past_tickets": [
+        "TICKET-003"
+      ]
+    },
+    {
+      "id": "USER-004",
+      "name": "Diana Cruz",
+      "email": "diana.cruz@example.com",
+      "device_type": "Desktop",
+      "product_model": "HP All-in-One 24",
+      "os_version": "Windows 11",
+      "location": "Paris",
+      "past_tickets": [
+        "TICKET-004"
+      ]
+    },
+    {
+      "id": "USER-005",
+      "name": "Ethan Patel",
+      "email": "ethan.patel@example.com",
+      "device_type": "Laptop",
+      "product_model": "HP Spectre x360",
+      "os_version": "Windows 11",
+      "location": "Toronto",
+      "past_tickets": [
+        "TICKET-005"
+      ]
+    },
+    {
+      "id": "USER-006",
+      "name": "Fiona Chen",
+      "email": "fiona.chen@example.com",
+      "device_type": "Printer",
+      "product_model": "HP DeskJet 3755",
+      "os_version": "N/A",
+      "location": "Sydney",
+      "past_tickets": []
+    },
+    {
+      "id": "USER-007",
+      "name": "George Kim",
+      "email": "george.kim@example.com",
+      "device_type": "Laptop",
+      "product_model": "HP ProBook 450",
+      "os_version": "Windows 10",
+      "location": "Seoul",
+      "past_tickets": []
+    },
+    {
+      "id": "USER-008",
+      "name": "Hannah M\u00c3\u00bcller",
+      "email": "hannah.muller@example.com",
+      "device_type": "Tablet",
+      "product_model": "HP Elite x2",
+      "os_version": "Windows 11",
+      "location": "Munich",
+      "past_tickets": []
+    },
+    {
+      "id": "USER-009",
+      "name": "Ivan Petrov",
+      "email": "ivan.petrov@example.com",
+      "device_type": "Laptop",
+      "product_model": "HP Omen 15",
+      "os_version": "Windows 11",
+      "location": "Moscow",
+      "past_tickets": []
+    },
+    {
+      "id": "USER-010",
+      "name": "Julia Lopez",
+      "email": "julia.lopez@example.com",
+      "device_type": "Printer",
+      "product_model": "HP Envy 6055",
+      "os_version": "N/A",
+      "location": "Madrid",
+      "past_tickets": []
+    }
+  ],
   "kb": [
     {
       "id": "KB-001",
@@ -574,6 +584,24 @@
       "user": "user10",
       "issue_code": "PR-001",
       "description": "Printer jammed again",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-007",
+      "user": "user-123",
+      "description": "User experiencing blue screen issue; initial KB steps did not resolve.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-008",
+      "user": "user-123",
+      "description": "User experiencing blue screen issue; attempted steps from KB article (Safe Mode, uninstalling updates, SFC, driver updates, system restore) without resolution.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-009",
+      "user": "user-123",
+      "description": "User experiencing blue screen issue; initial troubleshooting steps (Safe Mode, uninstalling updates, SFC scan, driver updates, System Restore) did not resolve the problem.",
       "status": "open"
     }
   ]

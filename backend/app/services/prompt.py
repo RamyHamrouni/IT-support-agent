@@ -23,5 +23,4 @@ def build_prompt(messages: list[dict[str, str]], categories: list[str]) -> str:
     return prompt_text
 
 
-    return tools
 

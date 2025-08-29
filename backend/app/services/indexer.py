@@ -35,9 +35,9 @@ async def index_documents(app: FastAPI) -> list[str]:
                                embedding_dim=embedding.get("embedding_model", {}).get("params", {}).get("embedding_dim", 768))
     try:
         kb_indexer.upsert_documents(
-            documents=[{k: v for k, v in d.items() if k != "id"} for d in kb_data],
+            documents=[{k: v for k, v in d.items()} for d in kb_data],
             text_fields=["question", "answer"],
-            metadata_fields=["category", "issue_code"]
+            metadata_fields=["category", "issue_code","answer","question"]
         )
         print("✅ Knowledge Database indexed successfully")
     except Exception as e:
@@ -50,13 +50,22 @@ async def index_documents(app: FastAPI) -> list[str]:
                                embedding_dim=embedding.get("embedding_model", {}).get("params", {}).get("embedding_dim", 768))
     try:
         guide_indexer.upsert_documents(
-            documents=[{k: v for k, v in d.items() if k != "id"} for d in guide_data],
-            text_fields=["issue", "diagnostic_questions", "troubleshooting_steps"],
-            metadata_fields=["category", "issue_code"]
+            documents=[{k: v for k, v in d.items()} for d in guide_data],
+            text_fields=["issue", "resolution_steps"],
+            metadata_fields=[
+                "category",
+                "issue_code",
+                "issue",
+                "troubleshooting_steps",  # correct spelling
+                "quick_fixes",
+                "escalation_criteria",
+                "diagnostic_questions",
+            ]
         )
         print("✅ Guides indexed successfully ")
     except Exception as e:
         print(f"Error indexing Guide data: {e}")
+        
         return []
     # --- Return combined unique categories ---
     kb_categories = {item["category"] for item in kb_data}
