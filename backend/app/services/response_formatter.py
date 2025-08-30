@@ -1,6 +1,6 @@
 def format_kb_results(results):
     items = "\n\n".join(
-        f"**Q:** {r['question']}\n**A:** {r['answer']}\n(Score: {r['score']:.2f})"
+        f"**Q:** {r['question']}\n**A:** {r['answer']}\n(Confidence: {r['confidence']:.2f})"
         for r in results
     )
     return (
@@ -16,7 +16,7 @@ def format_issue_guide_results(results):
         f"**Troubleshooting Steps:** {r['troubleshooting_steps']}\n"
         f"**Quick Fixes:** {r['quick_fixes']}\n"
         f"**Escalation Criteria:** {r['escalation_criteria']}\n"
-        f"(Score: {r['score']:.2f})"
+        f"(Confidence: {r['confidence']:.2f})"
         for r in results
     )
     return (

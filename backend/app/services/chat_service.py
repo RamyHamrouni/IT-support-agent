@@ -30,4 +30,4 @@ async def process_chat(req: ChatRequest, categories: list[str], attempts: int = 
     if message.tool_calls:
         return await handle_tool_call(req, categories, message.tool_calls, attempts)
 
-    return ChatResponse(reply=message.content)
+    return ChatResponse(messages=req.messages + [message])

@@ -4,26 +4,15 @@ import streamlit as st
 import os
 
 
-BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
+BACKEND_URL = os.getenv("BACKEND_URL")
 
 
-st.set_page_config(page_title="HF Chatbot", page_icon="🤖")
+st.set_page_config(page_title="Intelligent IT Support Assistant", page_icon="🤖")
 
 
-with st.sidebar:
-    st.title("⚙️ Settings")
-    model = st.text_input("Model", value="openai/gpt-oss-20b")
-    max_new_tokens = st.slider("Max new tokens", 16, 1024, 256, 8)
-    temperature = st.slider("Temperature", 0.0, 2.0, 0.7, 0.1)
-    top_p = st.slider("Top-p", 0.0, 1.0, 0.95, 0.05)
-    st.markdown("""
-    **Tip:** Try other instruction-tuned models like:
-    - `mistralai/Mistral-Nemo-Instruct-2407`
-    - `meta-llama/Llama-3.1-8B-Instruct`
-    """)
 
 
-st.title("🤖 HF Inference API Chatbot")
+st.title("Intelligent IT Support Agent")
 
 
 if "history" not in st.session_state:
@@ -31,6 +20,8 @@ if "history" not in st.session_state:
 
 
 for msg in st.session_state.history:
+    if msg["role"] in ["tool-call", "tool-call-output","system"]:
+        continue  # Skip displaying these messages
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
@@ -47,20 +38,22 @@ if user_input:
     # Call backend
     payload = {
     "messages": st.session_state.history,
-    "model": model,
-    "max_new_tokens": max_new_tokens,
-    "temperature": temperature,
-    "top_p": top_p,
     }
     try:
         r = requests.post(f"{BACKEND_URL}/chat", json=payload, timeout=180)
         r.raise_for_status()
         data = r.json()
         reply = data.get("reply", "(no reply)")
+        new_messages = data.get("messages", [])
     except Exception as e:
         reply = f"Error: {e}"
+        new_messages = []
 
-
-    st.session_state.history.append({"role": "assistant", "content": reply})
-    with st.chat_message("assistant"):
-        st.markdown(reply)
+    # Only append new messages that are not already in the session history
+    existing = len(st.session_state.history)
+    for msg in new_messages[existing:]:
+        st.session_state.history.append(msg)
+        if msg["role"] in ["tool-call", "tool-call-output", "system"]:
+            continue  # Skip displaying these messages
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])

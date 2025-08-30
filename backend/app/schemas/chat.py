@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import List, Literal, Optional
 
 
-Role = Literal["system", "user", "assistant"]
+Role = Literal["system", "user", "assistant", "tool-call", "tool-call-output"]
 
 
 class Message(BaseModel):
@@ -15,4 +15,4 @@ class ChatRequest(BaseModel):
 
 
 class ChatResponse(BaseModel):
-    reply: str
+    messages: List[Message] | None = None # full history

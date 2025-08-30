@@ -1,5 +1,6 @@
 import json
 from app.services.tool_handlers import knowledge_base, guide_issue, ticket
+from app.schemas.chat import Message
 
 
 async def handle_tool_call(req, categories, tool_calls, attempts):
@@ -12,6 +13,7 @@ async def handle_tool_call(req, categories, tool_calls, attempts):
         "query_issue_guide": guide_issue.handle_issue_guide,
         "manage_ticket": ticket.handle_ticket,
     }
+    req.messages.append(Message(role="tool-call", content=call.function.name))
 
     if fn not in handlers:
         raise ValueError(f"Unsupported tool: {fn}")

@@ -13,14 +13,13 @@ class HFClient:
    
     def generate(self, model: str, prompt: str, params: Dict[str, Any],tools) :
         
-        print(f"Calling HF Inference API for model: {model}")
         
-        print(f"Prompt: {prompt}")
         completion =self.client.chat.completions.create(
             model="deepseek-ai/DeepSeek-V3-0324",
             messages=[{"role": "user", "content": prompt}],
             tools=tools,
-            tool_choice="auto"
+            tool_choice="auto",
+        
             
         )
         if not completion.choices:

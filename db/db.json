@@ -603,6 +603,84 @@
       "user": "user-123",
       "description": "User experiencing blue screen issue; initial troubleshooting steps (Safe Mode, uninstalling updates, SFC scan, driver updates, System Restore) did not resolve the problem.",
       "status": "open"
+    },
+    {
+      "id": "TICKET-010",
+      "user": "user-123",
+      "description": "User experiencing blue screen issue; initial troubleshooting steps did not resolve the problem.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-011",
+      "user": "user-123",
+      "description": "VS Code crashes on launch in Windows 11. Initial troubleshooting steps (restart, reinstall, updates, antivirus) and guide fixes (compatibility mode, driver update) did not resolve the issue.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-012",
+      "user": "user-123",
+      "description": "VS Code not launching properly after troubleshooting steps: restart, update, reinstall, system updates, disable antivirus, compatibility mode, and graphics driver update.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-013",
+      "user": "user-123",
+      "description": "VS Code fails to launch despite troubleshooting steps (restart, update, reinstall, disable antivirus, compatibility mode, and driver updates). Issue persists.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-014",
+      "user": "user-123",
+      "description": "VS Code is not launching despite troubleshooting steps (restart, update, reinstall, disable antivirus, compatibility mode, graphics drivers).",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-015",
+      "user": "user-123",
+      "description": "VS Code fails to launch despite trying multiple troubleshooting steps including restarting PC, updating/reinstalling VS Code, checking system updates, and temporarily disabling antivirus.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-016",
+      "user": "user-123",
+      "description": "User cannot connect to WiFi while other devices can connect to the same network. Issue persists after basic troubleshooting.",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-017",
+      "user": "user-123",
+      "description": "Application plante au d\u00e9marrage m\u00eame apr\u00e8s r\u00e9installation",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-018",
+      "user": "user-123",
+      "description": "Imprimante ne se connecte plus au WiFi pour l'utilisateur Bob",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-019",
+      "user": "user-123",
+      "description": "Application plante au d\u00e9marrage m\u00eame apr\u00e8s r\u00e9installation",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-020",
+      "user": "user-123",
+      "description": "Imprimante ne se connecte plus au WiFi pour Bob",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-021",
+      "user": "user-123",
+      "description": "Imprimante ne se connecte plus au WiFi pour Bob",
+      "status": "open"
+    },
+    {
+      "id": "TICKET-022",
+      "user": "user-123",
+      "description": "Imprimante ne se connecte plus au WiFi",
+      "status": "open"
     }
   ]
 }

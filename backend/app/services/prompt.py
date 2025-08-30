@@ -20,6 +20,7 @@ def build_prompt(messages: list[dict[str, str]], categories: list[str]) -> str:
         f"<SYSTEM>\n{system}\n{workflow}\n</SYSTEM>\n\n"
         f"{convo}\nASSISTANT:"
     )
+    print("prompt_text", prompt_text)
     return prompt_text
 
 
