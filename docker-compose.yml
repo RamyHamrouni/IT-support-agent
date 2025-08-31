@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - HF_API_BASE=https://api-inference.huggingface.co/models
+      - ALLOWED_ORIGINS=http://localhost:8501
+      - DB_URL=http://db:8001
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      
+    depends_on:
+      - db 
+      - qdrant
+    networks:
+      - appnet
+
+  db:
+    build:
+      context: ./db
+    container_name: db
+    ports:
+      - "8001:8001"
+    networks:
+      - appnet
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+    networks:
+      - appnet
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: bridge
