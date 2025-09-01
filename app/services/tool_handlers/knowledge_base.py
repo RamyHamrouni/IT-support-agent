@@ -17,14 +17,14 @@ async def handle_knowledge_base(req, categories, args, attempts):
     print(results)
 
     if len(results) == 0:
-        output = "I couldn’t find a relevant case. Would you like me to escalate this issue?"
+        output = "I couldn’t find a relevant case. Would you like me to search the guide issue instructions instead?"
         req.messages.append(Message(role="assistant", content=output))
         req.messages.append(Message(role="tool-call-output", content="No results were retrieved from the knowledge base."))
         return ChatResponse(user_id=req.user_id, messages=req.messages)
 
         
     if max(r.score for r in results) <= 0.2:
-        output = "I couldn’t find a relevant case. Would you like me to escalate this issue?"
+        output = "I couldn’t find a relevant case. Would you like me to search the guide issue instructions instead?"
         req.messages.append(Message(role="assistant", content=output))
         req.messages.append(Message(role="tool-call-output", content="The retrieved knowledge base results are not relevant enough."))
         return ChatResponse(user_id=req.user_id, messages=req.messages)

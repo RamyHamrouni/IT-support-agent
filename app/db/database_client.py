@@ -41,3 +41,33 @@ def fetch_tickets(user_id: str) -> list[dict]:
     except requests.RequestException as e:
         print(f"Error fetching tickets: {e}")
         return []
+
+
+def create_ticket(issue_code: str, issue_description: str, status: str, user: str = "user-123") -> dict:
+    """Create a new ticket in the external DB."""
+    try:
+        payload = {
+            "description": issue_description,
+            "status": status,
+        }
+        print(f"Creating ticket with payload: {payload}")
+        try:
+            resp = requests.post(f"{DB_URL}/tickets/{user}", json=payload)
+            resp.raise_for_status()
+        except requests.RequestException as e:
+            print(f"Error creating ticket: {e}")
+            payload = {
+                "description": issue_description,
+                "status": status,
+            }
+            print(f"Creating ticket with payload: {payload}")
+            resp = requests.post(f"{DB_URL}/tickets/{user}", json=payload)
+            resp.raise_for_status()
+            return {"error": str(e)}
+        
+        ticket_data = resp.json()
+        print(f"Ticket created successfully: {ticket_data}")
+        return ticket_data
+    except requests.RequestException as e:
+        print(f"Error creating ticket: {e}")
+        return {"error": str(e)}

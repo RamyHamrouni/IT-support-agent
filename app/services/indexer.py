@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.db.qdrant_client import QdrantWrapper
 from app.utils.yaml_loader import load_yaml
-from app.db.fetch_data import fetch_kb_data, fetch_guide_data
+from app.db.database_client import fetch_kb_data, fetch_guide_data
 from typing import List, Dict
 
 

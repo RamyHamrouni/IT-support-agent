@@ -35,22 +35,12 @@ def query_guide_issue(query:str,max_results:int,type_issue:str):
                                embedding_dim=embedding.get("embedding_model", {}).get("params", {}).get("embedding_dim"))
     results = kb_vector_search.query(query=query,max_results=max_results,metadata_key="category",metadata_value=type_issue)
     return results
-def manage_ticket(issue_code:str,issue_description:str,status:str):
-    import requests
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
-    DB_URL = os.getenv("DB_URL")
-    payload = {
-        "description": issue_description,
-        "status": status,
-        "user":"user-123"
-    }
-    print(f"Managing ticket with payload: {payload}")
-    try:
-        resp = requests.post(f"{DB_URL}/tickets", json=payload)
-        resp.raise_for_status()
-        return resp.json()
-    except requests.RequestException as e:
-        print(f"Error managing ticket: {e}")
-        return {"error": str(e)}
+def manage_ticket(issue_code: str, issue_description: str, status: str, user: str = "user-123"):
+    from app.db.database_client import create_ticket
+    
+    return create_ticket(
+        user=user,
+        issue_code=issue_code,
+        issue_description=issue_description,
+        status=status
+    )

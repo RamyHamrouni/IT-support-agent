@@ -50,7 +50,7 @@ app/                                  # Main application package
 │   │   └── prompt.yaml              # AI prompt templates and system messages 
 ├── db/                               # Data layer
 │   ├── qdrant_client.py             # Vector database client for semantic search
-│   └── fetch_data.py                # Data operations from external database
+│   └── database_client.py           # Data operations from external database
 ├── llm/                              # Language model integration
 │   └── hf_client.py                 # HuggingFace client for LLM inference (potentially more client can be added with a unified    interface)
 ├── schemas/                          # Pydantic schemas
@@ -67,8 +67,12 @@ app/                                  # Main application package
 │       ├── guide_issue.py           # Issue guide handler
 │       └── ticket.py                # Ticket management handler
 └── utils/                            # Utility functions
-    └── yaml_loader.py               # YAML configuration file loader utility
-```
+    └── yaml_loader.py                # YAML configuration file loader utility
+tests/                                # Test suite
+├── ...
+├── test_perf_chat.py                 # Chat performance tests (Latency max 10)
+├── test_chat_concurrency.py          # Chat concurrency tests ( minimum 5 )
+└── test_chat.py                      # Integration/functional tests for the /chat endpoint
 
 
 
@@ -89,7 +93,7 @@ app/                                  # Main application package
    HF_API_BASE=https://api-inference.huggingface.co
    QDRANT_URL=http://localhost:6333
    QDRANT_API_KEY=your-qdrant-api-key  # if using Qdrant Cloud
-   DB_URL=http://your-ticket-system-api  # for ticket integration
+   DB_URL=https://it-supportdatabase-1.onrender.com/  # IT Support Database
    ```
 
 
@@ -135,7 +139,7 @@ app/                                  # Main application package
    QDRANT_API_KEY=your-qdrant-api-key
 
    # Ticket System Integration
-   DB_URL=http://your-ticket-system-api
+   DB_URL=https://it-supportdatabase-1.onrender.com/
 
    # Development Settings
    DEBUG=true
@@ -150,15 +154,101 @@ app/                                  # Main application package
 
 7. The API will be available at http://localhost:8000
 
+## Quick Start
 
+### Testing the Chat Endpoint
+
+Once your application is running, you can quickly test the chat functionality:
+
+#### Using curl
+```bash
+curl -X POST "http://localhost:8000/chat" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "USER-001",
+    "messages": [
+      {
+        "role": "user",
+        "content": "My computer wont connect to WiFi"
+      }
+    ]
+  }'
+```
+
+#### Using Python requests
+```python
+import requests
+
+url = "http://localhost:8000/chat"
+payload = {
+    "user_id": "USER-001",
+    "messages": [
+        {
+            "role": "user",
+            "content": "My computer wont connect to WiFi"
+        }
+    ]
+}
+
+response = requests.post(url, json=payload)
+print(response.json())
+```
+
+#### Using the Swagger UI
+1. Open your browser and go to http://localhost:8000/docs
+2. Find the `/chat` endpoint
+3. Click "Try it out"
+4. Enter your request body
+5. Click "Execute"
+
+### Default User
+The examples above use `USER-001` which is a pre-configured user in the IT database. This user has:
+- Device: HP Pavilion x360 laptop
+- OS: Windows 11
+- Location: New York
+- Past support history
+
+### Finding Other Users
+To see all available users or choose a different one:
+```bash
+# View all users
+curl "https://it-supportdatabase-1.onrender.com/user"
+
+# View specific user details
+curl "https://it-supportdatabase-1.onrender.com/user/USER-001"
+```
+
+You can replace `USER-001` in the chat examples with any valid user ID from the database.
+
+### Expected Response
+The chat endpoint will return a response containing:
+- `user_id`: The user identifier you provided in the request
+- `messages`: An array of conversation messages including your original message and the AI's response
+
+The AI will provide troubleshooting guidance, and may automatically invoke tools to search the knowledge base or create support tickets based on your issue description.
+
+**Response Format:**
+```json
+{
+  "user_id": "USER-001",
+  "messages": [
+    {
+      "role": "user",
+      "content": "My computer wont connect to WiFi"
+    },
+    {
+      "role": "assistant", 
+      "content": "I understand you're having trouble connecting to WiFi. Let me help you troubleshoot this issue..."
+    }
+  ]
+}
+```
 
 ## API Documentation
 
 Once the application is running, you can access:
 
 - **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **OpenAPI Schema**: http://localhost:8000/openapi.json
 
 ## API Endpoints
 

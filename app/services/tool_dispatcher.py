@@ -1,9 +1,10 @@
 import json
 from app.services.tool_handlers import knowledge_base, guide_issue, ticket
 from app.schemas.chat import Message
+from typing import Optional, List
 
 
-async def handle_tool_call(req, categories, tool_calls, attempts):
+async def handle_tool_call(req, categories:Optional[List[str]], tool_calls, attempts:Optional[int]):
     call = tool_calls[0]
     fn = call.function.name
     args = json.loads(call.function.arguments)
@@ -19,4 +20,7 @@ async def handle_tool_call(req, categories, tool_calls, attempts):
     if fn not in handlers:
         raise ValueError(f"Unsupported tool: {fn}")
 
-    return await handlers[fn](req, categories, args, attempts)
+    if fn == "manage_ticket":
+        return await handlers[fn](req, args)
+    else:
+        return await handlers[fn](req, categories, args, attempts)
