@@ -21,7 +21,7 @@ The project aims to **reduce frustration, speed up problem resolution, and provi
 
 The IT Support Agent is designed to streamline technical problem resolution through a multi-level workflow:
 
-![Logo](images/workflow-comp.png)
+![Logo](images/before-after.png)
 
 
 ### Current State
@@ -60,7 +60,7 @@ The IT Support Agent is designed to streamline technical problem resolution thro
 
 This diagram shows how IT knowledge and troubleshooting data are processed and stored for efficient retrieval using **vector search**.
 
-![Logo](images/indexing.png)
+![Logo](images/data-indexing.png)
 
 
 ### Steps:
@@ -84,4 +84,52 @@ This diagram shows how IT knowledge and troubleshooting data are processed and s
 ### Why Qdrant?
 - Supports **prefiltering before vector search** to maximize efficiency
 - Uses a **graph-based HNSW algorithm** for high performance (better than brute-force search)
+
+## Full Agent Workflow
+
+This section describes the **complete operational flow** of the IT Support Agent, integrating the Knowledge Base (KB), Troubleshooting Guide, and Ticketing System into one seamless process.
+
+### Workflow Diagram
+
+![Full Agent Workflow](images/agent-workflow.png)
+
+### Workflow Explanation
+
+1. **User Interaction (Prompt Input)**  
+   - The process begins when a user reports an issue in natural language.
+
+2. **Issue Clarity Check**  
+   - The LLM determines whether the issue description is clear.  
+   - **If unclear:** The LLM gathers more information from the user.  
+   - **If clear:** It proceeds to search the Knowledge Base.
+
+3. **Knowledge Base Search**  
+   - Function call: `QueryKB(description, filter=category, max_results=3)`  
+   - The system prefilters the database by category, then computes similarity to find the top 3 relevant questions.  
+   - Results with a confidence score below **0.2** are filtered out.
+
+4. **Result Evaluation**  
+   - The LLM evaluates whether the retrieved cases are relevant to the user’s issue.  
+   - **If relevant:** The LLM uses these cases to assist the user.  
+     - If resolved → A **closed ticket** is generated with full intervention details.  
+   - **If not relevant:** The LLM requests more detailed information or suggests searching the Issue Guide.
+
+5. **Issue Guide Search (Advanced Troubleshooting)**  
+   - Function call: `QueryIssueGuide(description, filter=category, max_results=1)`  
+   - Similar filtering and confidence scoring are applied.  
+   - If results are relevant → The LLM assists the user using the guide.  
+     - If resolved → Closed ticket is created.  
+   - If not resolved → An **open ticket** is generated and escalated for human intervention.
+
+6. **Ticket Handling**  
+   - **Closed ticket:** Includes the full details of the intervention and resolution steps.  
+   - **Open ticket:** Includes a summary of the problem and the attempted solutions before escalation.
+
+### Key Features of the Full Agent Workflow
+
+- **Layered Resolution Process:** Starts with Knowledge Base, moves to Issue Guide, then escalates if needed.  
+- **Confidence-based Filtering:** Prevents irrelevant or low-confidence answers from being shown.  
+- **Automated Ticket Management:** Automatically generates closed tickets for solved cases and open tickets for unresolved ones.  
+- **Adaptive Questioning:** If initial results fail, the LLM asks targeted questions to refine the search.  
+
 

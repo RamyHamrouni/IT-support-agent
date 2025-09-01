@@ -15,45 +15,27 @@ An AI-powered virtual assistant designed to help users solve technical problems 
 - **Docker Support**: Containerized deployment for development and production environments
 - **Real-time Chat Interface**: RESTful API for seamless integration with chat applications
 
-## How It Works
-
-The IT Support Agent operates on a sophisticated multi-level workflow:
-
-### Level 0 (Self-Service)
-- User describes their problem in natural language
-- AI searches the knowledge base for similar issues and solutions
-- If a solution is found, the ticket is automatically closed with the resolution
-
-### Level 1 (Guided Support) 
-- If no direct solution is found, the AI provides guided troubleshooting steps
-- Uses structured issue guides with step-by-step instructions
-- Covers common problems like WiFi connectivity, software installation, hardware issues
-
-### Level 2 (Human Escalation)
-- For unresolved complex issues, the system creates support tickets
-- Escalates to human technicians with complete problem context
-- Tracks ticket status and provides updates to users
 
 ## Architecture Overview
 
 The IT Support Agent follows a modular architecture:
 
-1. **API Layer**: FastAPI endpoints for authentication and chat
+1. **API Layer**: FastAPI endpoint for chat
 2. **Service Layer**: Business logic for chat processing and tool orchestration  
 3. **Tool Layer**: Specialized handlers for knowledge base, guides, and tickets
-4. **Data Layer**: Vector database for semantic search, SQL database for users
-5. **AI Layer**: HuggingFace integration for natural language processing
+4. **Data Layer**: Vector database for semantic search, custom database server for user management and data operations
+5. **Prompt Layer**: Dynamic prompt building, user context integration (User Profile), database issue categories for LLM classification in RAG tool filtering, and workflow instructions
+6. **AI Layer**: HuggingFace integration for natural language processing
 
 This architecture enables scalable, maintainable AI-powered IT support automation.
 
----
-
-**Built with**: FastAPI, HuggingFace Transformers, Qdrant, Docker
 
 
 ## Project Structure
 
 The following structure shows **only** the files I added to implement the IT support agent functionality:
+
+**NOTE**: There are other files in the project that were part of the original template, but the files listed below are specifically what I implemented for the IT support agent functionality.
 
 ```
 app/                                  # Main application package
@@ -62,26 +44,25 @@ app/                                  # Main application package
 ├── core/                             # Core configuration and utilities
 │   ├── config/                       # YAML configuration files
 │   │   ├── app.yaml                 # Application settings and parameters
-│   │   ├── llm.yaml                 # LLM model configuration (Mistral-7B-Instruct-v0.3)
-│   │   ├── embedding.yaml           # Embedding model settings (sentence-transformers)
-│   │   ├── tools.yaml               # Tool definitions for AI function calling
-│   │   └── prompt.yaml              # AI prompt templates and system messages
-│   └── config.py                    # Main configuration loader and settings
+│   │   ├── llm.yaml                 # LLM model configuration (model selection , decoding parameters selelection :                                      temperature - topk )
+│   │   ├── embedding.yaml           # Embedding model settings (embedding model configuration)
+│   │   ├── tools.yaml               # Tool definitions for AI function  
+│   │   └── prompt.yaml              # AI prompt templates and system messages 
 ├── db/                               # Data layer
 │   ├── qdrant_client.py             # Vector database client for semantic search
-│   └── fetch_data.py                # Data fetching operations from external database
+│   └── fetch_data.py                # Data operations from external database
 ├── llm/                              # Language model integration
-│   └── hf_client.py                 # HuggingFace client for LLM inference
+│   └── hf_client.py                 # HuggingFace client for LLM inference (potentially more client can be added with a unified    interface)
 ├── schemas/                          # Pydantic schemas
 │   └── chat.py                      # Chat request/response data models
 ├── services/                         # Business logic layer
 │   ├── chat_service.py              # Main chat processing and AI orchestration
 │   ├── indexer.py                   # Document indexing for vector search
 │   ├── prompt.py                    # AI prompt management and templating
-│   ├── response_formatter.py        # Response formatting and structure
-│   ├── tool_dispatcher.py           # Tool calling dispatcher for AI functions
-│   ├── tools.py                     # Tool definitions and utility functions
-│   └── tool_handlers/               # Specific tool implementations
+│   ├── response_formatter.py        # Formats fetched data from external sources to be used by the llm
+│   ├── tool_dispatcher.py           # Tool calling dispatcher for AI functions (Routes invoked function by the llm to the appropriate handler)
+│   ├── tools.py                     # Tool definitions 
+│   └── tool_handlers/               # Intelligent response processing, relevance filtering, conversation management, error handling, and user experience optimization 
 │       ├── knowledge_base.py        # Knowledge base search handler
 │       ├── guide_issue.py           # Issue guide handler
 │       └── ticket.py                # Ticket management handler
@@ -89,12 +70,7 @@ app/                                  # Main application package
     └── yaml_loader.py               # YAML configuration file loader utility
 ```
 
-## Requirements
 
-- Python 3.11+
-- Docker (optional, recommended)
-- Hugging Face API key (for LLM integration)
-- Qdrant vector database (can run in Docker)
 
 ## Installation
 
@@ -202,15 +178,31 @@ The application is configured through environment variables set in a `.env` file
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | `HF_TOKEN` | Hugging Face API token for LLM access | - | Yes |
-| `HF_API_BASE` | Hugging Face API base URL | `https://api-inference.huggingface.co` | No |
+| `HF_API_BASE` | Hugging Face API base URL | `https://api-inference.huggingface.co` | Yes |
 | `QDRANT_URL` | Qdrant vector database URL | `http://localhost:6333` | Yes |
-| `QDRANT_API_KEY` | Qdrant API key (for cloud) | - | No |
-| `DB_URL` | External ticket system API URL | `https://it-supportdatabase-1.onrender.com/` | Yes |
-| `DEBUG` | Enable debug mode | `true` | No |
+| `QDRANT_API_KEY` | Qdrant API key (for cloud) | - | Yes |
+| `DB_URL` | External IT Database URL | `https://it-supportdatabase-1.onrender.com/` | Yes |
+
+### Important: Hugging Face Token Requirements
+
+**Critical**: When creating your Hugging Face API token, you **MUST** ensure it has permission to access **Inference API providers**. This permission is essential for the LLM integration to work properly.
+
+**Steps to create a token with correct permissions:**
+1. Go to [Hugging Face Settings > Access Tokens](https://huggingface.co/settings/tokens)
+2. Click "New token"
+3. Give your token a name (e.g., "IT-Support-Agent")
+4. **IMPORTANT**: Set the role to "Write" and ensure "Inference API" is checked
+5. Click "Generate token"
+6. Copy the token and add it to your `.env` file as `HF_TOKEN=your_token_here`
+
+**Why this matters**: Without Inference API provider permissions, the system cannot access the language models needed for AI-powered support responses.
+
 
 ### External Database API Reference
 
-The `DB_URL` environment variable should point to an external hosted FastAPI server on Render that provides access to **Tickets**, **Users**, and **Issues** stored in the IT Support database.
+The `DB_URL` environment variable should point to an external hosted FastAPI server on Render that provides access to **Tickets**, **Users**, **Knowledge Base Examples**, **Issues Guide Cases** stored in the IT Support database.
+
+**Note**: The default `DB_URL` points to a custom server I created that simulates an IT company's support database based on HP support data. You can either use this default URL or create your own database server following the API reference below.
 
 #### Base URL Format
 ```
@@ -223,36 +215,92 @@ https://your-app-name.onrender.com  # for hosted service on Render
 **1. Tickets** - Support tickets created by users
 ```json
 {
-  "id": "TICKET-001",
-  "user": "user1",
-  "issue_code": "PR-001",
-  "description": "Printer jammed when printing",
-  "status": "open"
+    "id": "TICKET-007",
+    "user": "user-123",
+    "description": "User experiencing blue screen issue; initial KB steps did not resolve.",
+    "status": "open"
 }
 ```
 
 **2. Users** - Users who can create tickets
 ```json
 {
-  "id": "user1",
-  "name": "John Doe",
-  "email": "john@example.com"
+  "id": "USER-001",
+  "name": "Alice Johnson",
+  "email": "alice.johnson@example.com",
+  "device_type": "Laptop",
+  "product_model": "HP Pavilion x360",
+  "os_version": "Windows 11",
+  "location": "New York",
+  "past_tickets": [
+    "TICKET-001"
+  ]
 }
 ```
 
-**3. Issues** - Types of issues
+**3. Issues** - Issue Guide 
 ```json
 {
-  "code": "PR-001",
-  "name": "Printer Issue"
+  "id": "GUIDE-011",
+    "category": "Printer",
+    "issue_code": "PR-002",
+    "issue": "Printer prints blank pages",
+    "diagnostic_questions": [
+      "Are the ink/toner levels sufficient?",
+      "Have the protective seals been removed from the cartridges?",
+      "Was a cleaning cycle performed?"
+    ],
+    "troubleshooting_steps": [
+      "Check ink/toner levels via software or display",
+      "Ensure cartridges are correctly installed and unsealed",
+      "Run the printer's head cleaning utility",
+      "Print a nozzle check or test page"
+    ],
+    "quick_fixes": [
+      "Replace empty cartridges",
+      "Gently shake the toner cartridge"
+    ],
+    "escalation_criteria": "Escalate if cleaning cycles do not resolve the issue",
+    "ticketing_fields": [
+      "Issue summary",
+      "Printer model",
+      "Cartridge type",
+      "Steps attempted"
+    ],
+    "kb_links": [
+      "https://h30434.www3.hp.com/t5/Printers-Knowledge-Base/Blank-Pages/td-p/44567"
+    ]
+}
+```
+**3. Knowledge Base** - Knowledge Base
+```json
+{
+  {
+    "id": "KB-011",
+    "category": "Software",
+    "issue_code": "SW-002",
+    "question": "HP Smart app cannot find my printer",
+    "answer": "If HP Smart cannot find your printer:\n1. Ensure printer and computer are on the same Wi-Fi network.\n2. Restart your printer, computer, and Wi-Fi router.\n3. Make sure the printer is not in sleep mode.\n4. Temporarily disable any VPN or firewall.\n5. Re-add the printer in the HP Smart app.\nFor more info: Click here.",
+    "tags": [
+      "software",
+      "hp smart",
+      "discovery"
+    ],
+    "source_url": "https://h30434.www3.hp.com/t5/Software-FAQ/HPSmart-Discovery/td-p/88991"
+  }
 }
 ```
 
 #### Key Endpoints
+- `GET /` - Health check and API status
+- `GET /kb` - Retrieve all knowledge base articles
+- `GET /kb/{id}` - Retrieve specific knowledge base article by ID
+- `GET /guide` - Retrieve all issue guides
+- `GET /user` - Retrieve all users
+- `GET /user/{user_id}` - Retrieve specific user by ID
 - `GET /tickets` - Retrieve all tickets
-- `POST /tickets` - Create new tickets
-- `GET /users` - Retrieve all users
-- `GET /issues` - Retrieve all issue types
+- `GET /tickets/{user_id}` - Retrieve tickets for a specific user
+- `POST /tickets/{user_id}` - Create new ticket
 
 ### Qdrant Vector Database Setup
 
@@ -293,6 +341,10 @@ curl -X POST "http://localhost:8000/chat" \
 {
   "user_id": "user123",
   "messages": [
+       {
+        "role": "user",
+        "content": "My computer wont connect to WiFi"
+      },
     {
       "role": "assistant",
       "content": "I understand you're having trouble connecting to WiFi. Let me help you troubleshoot this issue.\n\nFirst, let's check some basic things:\n1. Make sure your WiFi is turned on\n2. Check if you're in range of your WiFi network\n3. Try restarting your computer\n\nIf these don't work, I can guide you through more advanced troubleshooting steps."
@@ -308,11 +360,13 @@ The system uses vector embeddings for efficient knowledge retrieval:
 ### Document Indexing
 - **Knowledge Base**: FAQ articles and solutions converted to vectors
 - **Issue Guides**: Troubleshooting procedures and step-by-step guides
-- **Embedding Model**: `sentence-transformers/all-mpnet-base-v2` (768 dimensions)
+- **Embedding Model**: `sentence-transformers/all-mpnet-base-v2` ( default, can be changed in embedding config file) 
 - **Vector Database**: Qdrant with HNSW indexing for fast similarity search
+- **Indexing Process**: Runs automatically on backend startup, indexing all documents from the connected external database
+- **Future Enhancement**: An endpoint can be created to synchronize the vector database when the external database is updated, ensuring real-time data consistency
 
 ### AI Models
-- **LLM**: `mistralai/Mistral-7B-Instruct-v0.3`
+- **LLM**: `mistralai/Mistral-7B-Instruct-v0.3`(default,  can be changed in llm config file)
 - **Parameters**: Configurable temperature, top_p, and max tokens
 - **Tool Calling**: Function calling for dynamic knowledge retrieval and ticket creation
 
@@ -336,22 +390,6 @@ To set up pre-commit hooks:
 pre-commit install
 ```
 
-### Database Operations
-
-#### Migrations
-To create a new migration after changing models:
-```bash
-alembic revision --autogenerate -m "Description of changes"
-```
-
-To apply migrations:
-```bash
-alembic upgrade head
-```
-
-#### Supported Databases
-- **SQLite**: Default for development (file-based)
-- **PostgreSQL**: Recommended for production
 
 ## Docker Deployment
 

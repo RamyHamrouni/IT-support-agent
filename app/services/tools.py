@@ -5,7 +5,6 @@ tools_config = load_yaml("tools.yaml")
 
 def get_tools(categories: list[str]):
     tools = tools_config.get("tools", [])
-    print(f"Available tools: {[tool['function']['name'] for tool in tools if 'function' in tool]}")
 
     for tool in tools:
         if "function" not in tool:
